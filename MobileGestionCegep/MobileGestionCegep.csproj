@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationId>com.EcoleDuWEB.MobileGestionCegep</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Resources\layout\CegepDetails_Activity.axml" />
+    <None Remove="Resources\layout\CegepModifier_Activity.axml" />
+    <None Remove="Resources\layout\Cegep_Activity.axml" />
+    <None Remove="Resources\layout\ListeCegepItem.axml" />
+    <None Remove="Resources\menu\CegepDetails_ActivityMenu.xml" />
+    <None Remove="Resources\menu\CegepModifier_ActivityMenu.xml" />
+    <None Remove="Resources\menu\Cegep_ActivityMenu.xml" />
+    <None Remove="Resources\values\strings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+  </ItemGroup>
+</Project>
