@@ -68,15 +68,15 @@ namespace AndroidCegep2024.Vues
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.CegepDetails_Activity);
+            SetContentView(Resource.Layout.DepartementDetails_Activity);
 
-            lblNomCegepAfficher = FindViewById<TextView>(Resource.Id.lblNomAfficher);
-            lblAdresseCegepAfficher = FindViewById<TextView>(Resource.Id.lblAdresseAfficher);
-            lblVilleCegepAfficher = FindViewById<TextView>(Resource.Id.lblVilleAfficher);
-            lblProvinceCegepAfficher = FindViewById<TextView>(Resource.Id.lblProvinceAfficher);
-            lblCodePostalCegepAfficher = FindViewById<TextView>(Resource.Id.lblCodePostalAfficher);
-            lblTelephoneCegepAfficher = FindViewById<TextView>(Resource.Id.lblTelephoneAfficher);
-            lblCourrielCegepAfficher = FindViewById<TextView>(Resource.Id.lblCourrielAfficher);
+            paramNomCegep = Intent.GetStringExtra("paramNomCegep");
+            paramNomDepartement = Intent.GetStringExtra("paramNomDepartement");
+            Title = paramNomCegep;
+
+            lblNomDepartement = FindViewById<TextView>(Resource.Id.lblNomDepartementAfficher);
+            lblNoDepartement = FindViewById<TextView>(Resource.Id.lblNoDepartementAfficher);
+            lblDescriptionDepartement = FindViewById<TextView>(Resource.Id.lblDescriptionDepartementAfficher);
 
             paramNomCegep = Intent.GetStringExtra("paramNomCegep");
         }
