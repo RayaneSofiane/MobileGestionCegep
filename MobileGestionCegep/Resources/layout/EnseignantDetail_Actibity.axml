@@ -9,17 +9,17 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:paddingTop="45dp"
-		android:id="@+id/tableLayoutCegepAfficher">
+		android:id="@+id/tableLayoutEnseignantAfficher">
         <TableRow
-            android:id="@+id/tableRowNomAfficher"
+            android:id="@+id/tableRowNomEnseignantAfficher"
             android:layout_height="93.0dp"
             android:gravity="center_horizontal"
             android:layout_width="match_parent">
             <TextView
-                android:text="Nom :"
+                android:text="No :"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_column="0"
-                android:id="@+id/lblNomAfficherz"
+                android:id="@+id/w"
                 android:layout_marginRight="0.0dp"
                 android:layout_marginLeft="0.0dp"
                 android:layout_width="126.0dp"
@@ -29,7 +29,57 @@
                 android:text="-"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_column="1"
-                android:id="@+id/lblNomAfficher"
+                android:id="@+id/lblNoEnseignantAfficher"
+                android:layout_marginRight="0.0dp"
+                android:layout_marginLeft="0.0dp"
+                android:layout_width="173.0dp"
+                android:layout_height="35.0dp" />
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRowNomAfficher"
+            android:layout_height="93.0dp"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent">
+            <TextView
+                android:text="Nom :"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_column="0"
+                android:id="@+id/nomEnseignant"
+                android:layout_marginRight="0.0dp"
+                android:layout_marginLeft="0.0dp"
+                android:layout_width="126.0dp"
+                android:layout_marginBottom="0.0dp"
+                android:layout_height="35.0dp" />
+            <TextView
+                android:text="-"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_column="1"
+                android:id="@+id/lblNomEnseignantAfficher"
+                android:layout_marginRight="0.0dp"
+                android:layout_marginLeft="0.0dp"
+                android:layout_width="173.0dp"
+                android:layout_height="35.0dp" />
+        </TableRow>
+        <TableRow
+            android:id="@+id/o"
+            android:layout_height="93.0dp"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent">
+            <TextView
+                android:text="Prenom :"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_column="0"
+                android:id="@+id/lblPrenomEnseignant"
+                android:layout_marginRight="0.0dp"
+                android:layout_marginLeft="0.0dp"
+                android:layout_width="126.0dp"
+                android:layout_marginBottom="0.0dp"
+                android:layout_height="35.0dp" />
+            <TextView
+                android:text="-"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_column="1"
+                android:id="@+id/lblPrenomEnseignantAfficher"
                 android:layout_marginRight="0.0dp"
                 android:layout_marginLeft="0.0dp"
                 android:layout_width="173.0dp"
@@ -44,7 +94,7 @@
                 android:text="Adresse :"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_column="0"
-                android:id="@+id/lblAdresseAfficherz"
+                android:id="@+id/adresseEnseignant"
                 android:layout_marginLeft="0.0dp"
                 android:layout_height="35.0dp"
                 android:layout_width="match_parent" />
@@ -52,7 +102,7 @@
                 android:text="-"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_column="1"
-                android:id="@+id/lblAdresseAfficher"
+                android:id="@+id/lblAdresseEnseignantAfficher"
                 android:layout_marginRight="0.0dp"
                 android:layout_marginLeft="0.0dp"
                 android:layout_height="35.0dp"
@@ -67,14 +117,14 @@
                 android:text="Ville :"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_column="0"
-                android:id="@+id/lblVilleAfficherz"
+                android:id="@+id/lblVille"
                 android:layout_height="35.0dp"
                 android:layout_width="match_parent" />
             <TextView
                 android:text="-"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_column="1"
-                android:id="@+id/lblVilleAfficher"
+                android:id="@+id/lblVilleEnseignantAfficher"
                 android:layout_marginRight="0.0dp"
                 android:layout_marginLeft="0.0dp"
                 android:layout_height="35.0dp"
@@ -89,14 +139,14 @@
                 android:text="Province :"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_column="0"
-                android:id="@+id/lblProvinceAfficherz"
+                android:id="@+id/lblProvinceEnseignant"
                 android:layout_height="35.0dp"
                 android:layout_width="match_parent" />
             <TextView
                 android:text="-"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_column="1"
-                android:id="@+id/lblProvinceAfficher"
+                android:id="@+id/lblProvinceEnseignantAfficher"
                 android:layout_marginRight="0.0dp"
                 android:layout_marginLeft="0.0dp"
                 android:layout_height="35.0dp"
@@ -111,14 +161,14 @@
                 android:text="Code Postal :"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_column="0"
-                android:id="@+id/lblCodePostalAfficherz"
+                android:id="@+id/lblCodePostalEnseignant"
                 android:layout_height="35.0dp"
                 android:layout_width="match_parent" />
             <TextView
                 android:text="-"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_column="1"
-                android:id="@+id/lblCodePostalAfficher"
+                android:id="@+id/lblCodePostalEnseignantAfficher"
                 android:layout_marginRight="0.0dp"
                 android:layout_marginLeft="0.0dp"
                 android:layout_height="35.0dp"
@@ -133,14 +183,14 @@
                 android:text="Telephone :"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_column="0"
-                android:id="@+id/lblTelephoneAfficherz"
+                android:id="@+id/lblTelephoneEnseignant"
                 android:layout_height="35.0dp"
                 android:layout_width="match_parent" />
             <TextView
                 android:text="-"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_column="1"
-                android:id="@+id/lblTelephoneAfficher"
+                android:id="@+id/lblTelephoneEnseignantAfficher"
                 android:layout_marginRight="0.0dp"
                 android:layout_marginLeft="0.0dp"
                 android:layout_height="35.0dp"
@@ -155,107 +205,22 @@
                 android:text="Courriel"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_column="0"
-                android:id="@+id/lblCourrielAfficherz"
+                android:id="@+id/lblCourrielEnseignant"
                 android:layout_height="35.0dp"
                 android:layout_width="match_parent" />
             <TextView
                 android:text="-"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_column="1"
-                android:id="@+id/lblCourrielAfficher"
+                android:id="@+id/lblCourrielEnseignantAfficher"
                 android:layout_marginRight="0.0dp"
                 android:layout_marginLeft="0.0dp"
                 android:layout_height="35.0dp"
                 android:layout_width="match_parent" />
         </TableRow>
-	</TableLayout>
-	<TextView
-		android:text="Liste de(s) département(s) : "
-		android:textAppearance="?android:attr/textAppearanceMedium"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/textViewListeDepartement" />
-	<ListView
-		android:minWidth="25px"
-		android:minHeight="25px"
-		android:layout_width="match_parent"
-		android:layout_height="188.0dp"
-		android:id="@+id/listViewDepartement"
-		android:layout_marginTop="20.5dp" />
-    <TableLayout
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tableLayout1">
-        <TableRow
-            android:id="@+id/tableRow1"
-             android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-
-            <TextView
-                android:text="No:"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_column="0"
-                android:id="@+id/textView10"
-                android:layout_width="match_parent" 
-                android:layout_height="match_parent" />
-            <EditText
-                android:inputType="text"
-                android:layout_column="1"
-                android:id="@+id/edtNoDepartement"
-                android:layout_width="313.9dp"
-                android:layout_height="match_parent"/>
-          
-        </TableRow>
-        ndroid:id="@+id/tableLayout1">
-        <TableRow
-            android:id="@+id/tableRow2"
-             android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-
-            <TextView
-                android:text="Nom:"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_column="0"
-                android:id="@+id/textView10"
-                android:layout_width="match_parent" 
-                android:layout_height="match_parent" />
-            <EditText
-                android:inputType="text"
-                android:layout_column="1"
-                android:id="@+id/edtNomDepartement"
-                android:layout_width="272.0dp"
-                android:layout_height="match_parent"/>
-          
-        </TableRow>
-        ndroid:id="@+id/tableLayout1">
-        <TableRow
-            android:id="@+id/tableRow3"
-             android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-
-            <TextView
-                android:text="Description"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_column="0"
-                android:id="@+id/textView10"
-                android:layout_width="match_parent" 
-                android:layout_height="match_parent" />
-            <EditText
-                android:inputType="text"
-                android:layout_column="1"
-                android:id="@+id/edtDescriptionDepartement"
-                android:layout_width="96.4dp"
-                android:layout_height="match_parent"/>
-          
-        </TableRow>
+	</TableLayout>      
         
-    </TableLayout>
-    <Button
-        android:text="Ajouter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnAjouterDepartement" />
+    
+
 </LinearLayout>
 

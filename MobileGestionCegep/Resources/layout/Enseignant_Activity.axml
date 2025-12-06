@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="Liste de(s) Enseignant(s) : "
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewListeEnseignant" />
+    <ListView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="94.1dp"
+        android:id="@+id/listViewEnseignant"
+        android:layout_marginTop="20.5dp" />
+    <TableLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableLayout1">
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="No:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_column="0"
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <EditText
+                android:inputType="text"
+                android:layout_column="1"
+                android:id="@+id/edtNoEnseignant"
+                android:layout_width="313.9dp"
+                android:layout_height="match_parent"/>
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Nom:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_column="0"
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <EditText
+                android:inputType="text"
+                android:layout_column="1"
+                android:id="@+id/edtNomEnseignant"
+                android:layout_width="272.0dp"
+                android:layout_height="match_parent"/>
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Prenom"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_column="0"
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <EditText
+                android:inputType="text"
+                android:layout_column="1"
+                android:id="@+id/edtPrenomEnseignantin"
+                android:layout_width="96.4dp"
+                android:layout_height="match_parent"/>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Adresse"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_column="0"
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <EditText
+                android:inputType="text"
+                android:layout_column="1"
+                android:id="@+id/edtAdresseEnseignant"
+                android:layout_width="96.4dp"
+                android:layout_height="match_parent"/>
+
+        </TableRow>
+         <TableRow
+            android:id="@+id/tableRow5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Ville"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_column="0"
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <EditText
+                android:inputType="text"
+                android:layout_column="1"
+                android:id="@+id/edtVilleEnseignant"
+                android:layout_width="96.4dp"
+                android:layout_height="match_parent"/>
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow76"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Province"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_column="0"
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <EditText
+                android:inputType="text"
+                android:layout_column="1"
+                android:id="@+id/edtProvinceEnseignant"
+                android:layout_width="96.4dp"
+                android:layout_height="match_parent"/>
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Code postal"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_column="0"
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <EditText
+                android:inputType="text"
+                android:layout_column="1"
+                android:id="@+id/edtCodePostalEnseignant"
+                android:layout_width="96.4dp"
+                android:layout_height="match_parent"/>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Telephone"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_column="0"
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <EditText
+                android:inputType="text"
+                android:layout_column="1"
+                android:id="@+id/edtTelephoneEnseignant"
+                android:layout_width="96.4dp"
+                android:layout_height="match_parent"/>
+
+        </TableRow>
+            <TableRow
+            android:id="@+id/tableRow8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Courriel"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_column="0"
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <EditText
+                android:inputType="text"
+                android:layout_column="1"
+                android:id="@+id/edtCourrielEnseignant"
+                android:layout_width="96.4dp"
+                android:layout_height="match_parent"/>
+
+        </TableRow>
+    </TableLayout>
+    <Button
+        android:text="Ajouter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAjouterEneinsant" />
+</LinearLayout>
+
