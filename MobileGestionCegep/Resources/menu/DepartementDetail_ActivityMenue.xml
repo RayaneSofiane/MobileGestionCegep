@@ -1,7 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:id="@+id/Eneignant" android:title="Eneignant"/>
-	<item android:id="@+id/Cours" android:title="Cours"/>
-	<item android:id="@+id/Supprimer" android:title="Supprimer"/>
-	<item android:id="@+id/Retour" android:title="Retour"/>
-</menu>
+﻿<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+	<TableLayout android:minWidth="25px" android:minHeight="25px" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="10dp" android:id="@+id/tableLayoutDepartementAfficher">
+		<TableRow android:id="@+id/tableRowNomDepartementAfficher" android:layout_height="93.0dp" android:gravity="center_horizontal">
+			<TextView android:text="Nom :" android:textAppearance="?android:attr/textAppearanceSmall" android:layout_column="0" android:id="@+id/lblNomDepartementAfficherz" android:layout_marginRight="0.0dp" android:layout_marginLeft="0.0dp" android:layout_width="126.0dp" android:layout_marginBottom="0.0dp" android:layout_height="18dp"/>
+			<TextView android:text="-" android:textAppearance="?android:attr/textAppearanceSmall" android:layout_column="1" android:id="@+id/lblNomDepartementAfficher" android:layout_marginRight="0.0dp" android:layout_marginLeft="0.0dp" android:layout_width="173.0dp" android:layout_height="18dp"/>
+		</TableRow>
+		<TableRow android:id="@+id/tableRowNoDepartementAfficher" android:gravity="center_horizontal">
+			<TextView android:text="No :" android:textAppearance="?android:attr/textAppearanceSmall" android:layout_column="0" android:id="@+id/lblNoDepartementAfficherz" android:layout_marginLeft="0.0dp" android:layout_height="18dp"/>
+			<TextView android:text="-" android:textAppearance="?android:attr/textAppearanceSmall" android:layout_column="1" android:id="@+id/lblNoDepartementAfficher" android:layout_marginRight="0.0dp" android:layout_marginLeft="0.0dp" android:layout_height="18dp"/>
+		</TableRow>
+		<TableRow android:id="@+id/tableRowDescriptionAfficher" android:gravity="center_horizontal">
+			<TextView android:text="Description :" android:textAppearance="?android:attr/textAppearanceSmall" android:layout_column="0" android:id="@+id/lblDescriptionDepartementAfficherz" android:layout_height="18dp"/>
+			<TextView android:text="-" android:textAppearance="?android:attr/textAppearanceSmall" android:layout_column="1" android:id="@+id/lblDescriptionDepartementAfficher" android:layout_marginRight="0.0dp" android:layout_marginLeft="0.0dp" android:layout_height="18dp"/>
+		</TableRow>
+	</TableLayout>
+</LinearLayout>
