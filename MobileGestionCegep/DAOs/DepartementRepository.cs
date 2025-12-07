@@ -45,11 +45,43 @@ namespace AndroidCegep2024.DAOs
         /// <summary>
         /// Constructeur privée du repository.
         /// </summary>
-        private DepartementRepository() :base() {}
+        private DepartementRepository() : base() { }
 
         #endregion
 
         #region MethodesService
+
+
+        /// <summary>
+        /// Méthode de service permettant de vider la liste des départements d'un departement.
+        /// </summary>
+        /// <param name="nomCegep">Le nom du Cégep.</param>
+        public void ViderListeDepartement(string nomCegep)
+        {
+            SqlCommand command = new SqlCommand(null, connexion);
+            command.CommandText = "DELETE FROM Departements WHERE idCegep = @idCegep";
+
+            SqlParameter idCegepParam = new SqlParameter("@idCegep", SqlDbType.Int);
+            idCegepParam.Value = CegepRepository.Instance.ObtenirIdCegep(nomCegep);
+            command.Parameters.Add(idCegepParam);
+
+            try
+            {
+                OuvrirConnexion();
+                command.Prepare();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erreur lors de la suppression de tous les départements...", ex);
+            }
+            finally
+            {
+                FermerConnexion();
+            }
+        }
+
+
 
         /// <summary>
         /// Méthode de service permettant d'obtenir le ID d'un département selon ses informatiques uniques.
@@ -117,7 +149,7 @@ namespace AndroidCegep2024.DAOs
             {
                 OuvrirConnexion();
                 SqlDataReader reader = command.ExecuteReader();
-                while(reader.Read())
+                while (reader.Read())
                 {
                     DepartementDTO departement = new DepartementDTO(reader.GetString(1), reader.GetString(2), reader.GetString(3));
                     liste.Add(departement);
@@ -166,7 +198,7 @@ namespace AndroidCegep2024.DAOs
                 reader.Read();
                 unDepartement = new DepartementDTO(reader.GetString(1), reader.GetString(2), reader.GetString(3));
                 reader.Close();
-            return unDepartement;
+                return unDepartement;
             }
             catch (Exception ex)
             {
@@ -226,29 +258,30 @@ namespace AndroidCegep2024.DAOs
         /// </summary>
         /// <param name="nomCegep">Le nom du Cégep.</param>
         /// <param name="departementDTO">Le DTO du département.</param>
+
         public void ModifierDepartement(string nomCegep, DepartementDTO departementDTO)
         {
             SqlCommand command = new SqlCommand(null, connexion);
 
             command.CommandText = " UPDATE Departements " +
-                                     " SET No = @no, " +
-                                     "     Description = @description " +
-                                   " WHERE Nom = @nom " +
-                                   "   AND idCegep = @idCegep ";
+                                 " SET No = @no, " +
+                                 "     Description = @description " +
+                                 " WHERE Nom = @nom " +
+                                 "   AND idCegep = @idCegep ";
 
             SqlParameter noParam = new SqlParameter("@no", SqlDbType.VarChar, 10);
             SqlParameter descriptionParam = new SqlParameter("@description", SqlDbType.VarChar, 100);
-			SqlParameter nomParam = new SqlParameter("@nom", SqlDbType.VarChar, 50);
+            SqlParameter nomParam = new SqlParameter("@nom", SqlDbType.VarChar, 50);  // Ajout du paramètre manquant
             SqlParameter idCegepParam = new SqlParameter("@idCegep", SqlDbType.Int);
 
             noParam.Value = departementDTO.No;
             descriptionParam.Value = departementDTO.Description;
-			nomParam.Value = departementDTO.Nom;
+            nomParam.Value = departementDTO.Nom;  // Ajout de la valeur du paramètre
             idCegepParam.Value = CegepRepository.Instance.ObtenirIdCegep(nomCegep);
 
             command.Parameters.Add(noParam);
             command.Parameters.Add(descriptionParam);
-			command.Parameters.Add(nomParam);
+            command.Parameters.Add(nomParam);  // Ajout du parametre 
             command.Parameters.Add(idCegepParam);
 
             try
@@ -291,6 +324,17 @@ namespace AndroidCegep2024.DAOs
                 OuvrirConnexion();
                 command.Prepare();
                 command.ExecuteNonQuery();
+            }
+            catch (SqlException e)
+            {
+                if (e.Number == 547)
+                {
+                    if (e.Message.Contains("FK_Departements_Cours"))
+                        throw new DBRelationException("Erreur - Impossible de supprimer le département. Cour(s) associé(s).", e);
+                    else
+                        throw new DBRelationException("Erreur - Impossible de supprimer le département. Enseignant(s) associé(s).", e);
+                }
+                else throw e;
             }
             catch (Exception ex)
             {

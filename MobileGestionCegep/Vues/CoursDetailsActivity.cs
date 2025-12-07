@@ -1,11 +1,9 @@
-﻿using Android.App;
-using Android.Content;
+﻿using Android.Content;
 using Android.Views;
 using AndroidCegep2024.Utils;
 using AndroidCegep2024.Controleurs;
 using AndroidCegep2024.DTOs;
 using MobileGestionCegep;
-using AndroidCegep2024.Vues;
 
 /// <summary>
 /// Namespace pour les classes de type Vue.
@@ -13,40 +11,42 @@ using AndroidCegep2024.Vues;
 namespace GestionCegepMobile.Vues
 {
     /// <summary>
-    /// Classe de type Activité pour la gestion d'un département.
+    /// Classe de type Activité pour l'affichage des détails d'un enseignant.
     /// </summary>
     [Activity(Label = "@string/app_name")]
-    public class DepartementDetailsActivity : Activity
+    public class CoursDetailsActivity : Activity
     {
         /// <summary>
-        /// Attribut représentant le paramètre du nom du Cégep reçu de l'activité précédente.
+        /// Attribut représentant le paramètre reçu de l'activité précédente.
         /// </summary>
-        private string paramNomCegep;
+        string paramNomCegep;
 
         /// <summary>
-        /// Attribut représentant le paramètre reçu du nom du département reçu de l'activité précédente.
+        /// Attribut représentant le paramètre reçu de l'activité précédente.
         /// </summary>
-        private string paramNomDepartement;
+        string paramNomDepartement;
 
         /// <summary>
-        /// Attribut représentant le département.
+        /// Attribut représentant le paramètre reçu de l'activité précédente.
         /// </summary>
-        private DepartementDTO leDepartement;
+        string paramNomCours;
+
+        private CoursDTO cours;
 
         /// <summary>
-        /// Attribut représentant l'étiquette pour le nom du département.
+        /// Attribut représentant l'étiquette du nom du cours pour l'affichage d'un cours.
         /// </summary>
-        private TextView lblNomDepartement;
+        private TextView lblNomCours;
 
         /// <summary>
-        /// Attribut représentant l'étiquette pour le no du département.
+        /// Attribut représentant l'étiquette du no du cours pour l'affichage d'un cours.
         /// </summary>
-        private TextView lblNoDepartement;
+        private TextView lblNoCours;
 
         /// <summary>
-        /// Attribut représentant l'étiquette pour la description du département.
+        /// Attribut représentant l'étiquette de la description d'un cours pour l'affichage d'un cours.
         /// </summary>
-        private TextView lblDescriptionDepartement;
+        private TextView lblDescriptionCours;
 
         /// <summary>
         /// Méthode de service appelée lors de la création de l'activité.
@@ -55,15 +55,15 @@ namespace GestionCegepMobile.Vues
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.DepartementDetails_Activity);
+            SetContentView(Resource.Layout.CoursDetails_Activity);
 
             paramNomCegep = Intent.GetStringExtra("paramNomCegep");
             paramNomDepartement = Intent.GetStringExtra("paramNomDepartement");
-            Title = paramNomCegep;
+            paramNomCours = Intent.GetStringExtra("paramNomCours");
 
-            lblNomDepartement = FindViewById<TextView>(Resource.Id.tvNomDepartement);
-            lblNoDepartement = FindViewById<TextView>(Resource.Id.tvNoDepartement);
-            lblDescriptionDepartement = FindViewById<TextView>(Resource.Id.tvDescriptionDepartement);
+            lblNomCours = FindViewById<TextView>(Resource.Id.lblNomCoursAfficher);
+            lblNoCours = FindViewById<TextView>(Resource.Id.lblNoCoursAfficher);
+            lblDescriptionCours = FindViewById<TextView>(Resource.Id.lblDescriptionCoursAfficher);
         }
 
         /// <summary>
@@ -77,28 +77,30 @@ namespace GestionCegepMobile.Vues
         }
 
         /// <summary>
-        /// Méthode permettant de rafraichir les informations du Cégep...
+        /// Méthode permettant de rafraichir la liste des cours...
         /// </summary>
         private void RafraichirInterfaceDonnees()
         {
             try
             {
-                leDepartement = CegepControleur.Instance.ObtenirDepartement(paramNomCegep, paramNomDepartement);
-                lblNomDepartement.Text = leDepartement.Nom;
-                lblNoDepartement.Text = leDepartement.No;
-                lblDescriptionDepartement.Text = leDepartement.Description;
+                cours = CegepControleur.Instance.ObtenirCours(paramNomCegep, paramNomDepartement,cours);
+                lblNomCours.Text = cours.Nom;
+                lblNoCours.Text = cours.No;
+                lblDescriptionCours.Text = cours.Description;
+                Title = cours.Nom;
             }
             catch (Exception)
             {
                 Finish();
             }
         }
-        /// <summary>Méthode de service permettant d'initialiser le menu de l'activité principale.</summary>
+
+        /// <summary>Méthode de service permettant d'initialiser le menu de l'activité.</summary>
         /// <param name="menu">Le menu à construire.</param>
         /// <returns>Retourne True si l'optionMenu est bien créé.</returns>
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            MenuInflater.Inflate(Resource.Menu.DepartementDetails_ActivityMenu, menu);
+            MenuInflater.Inflate(Resource.Menu.CoursDetails_ActivityMenu, menu);
             return base.OnCreateOptionsMenu(menu);
         }
 
@@ -109,30 +111,17 @@ namespace GestionCegepMobile.Vues
         {
             switch (item.ItemId)
             {
-                case Resource.Id.Enseignants:
-                    Intent activiteEnseignant = new Intent(this, typeof(EnseignantActivity));
-                    //On initialise les paramètres avant de lancer la nouvelle activité.
-                    activiteEnseignant.PutExtra("paramNomCegep", paramNomCegep);
-                    activiteEnseignant.PutExtra("paramNomDepartement", paramNomDepartement);
-                    //On démarre la nouvelle activité.
-                    StartActivity(activiteEnseignant);
-                    break;
-
-                case Resource.Id.Cours:
-                    Intent activiteCours = new Intent(this, typeof(CoursActivity));
-                    //On initialise les paramètres avant de lancer la nouvelle activité.
-                    activiteCours.PutExtra("paramNomCegep", paramNomCegep);
-                    activiteCours.PutExtra("paramNomDepartement", paramNomDepartement);
-                    //On démarre la nouvelle activité.
-                    StartActivity(activiteCours);
-                    break;
-
                 case Resource.Id.Modifier:
-                    Intent activitemodifier = new Intent(this, typeof(DepartementModifier_Activity));
-                    activitemodifier.PutExtra("paramNomCegep", paramNomCegep);
-                    activitemodifier.PutExtra("paramNomDepartement", paramNomDepartement);
-                    StartActivity(activitemodifier);
+
+                    Intent activiteCoursModifier = new Intent(this, typeof(CoursModifierActivity));
+                    //On initialise les paramètres avant de lancer la nouvelle activité.
+                    activiteCoursModifier.PutExtra("paramNomCegep", paramNomCegep);
+                    activiteCoursModifier.PutExtra("paramNomDepartement", paramNomDepartement);
+                    activiteCoursModifier.PutExtra("paramNomCours", paramNomCours);
+                    //On démarre la nouvelle activité.
+                    StartActivity(activiteCoursModifier);
                     break;
+
                 case Resource.Id.Supprimer:
                     try
                     {
@@ -142,23 +131,23 @@ namespace GestionCegepMobile.Vues
                         {
                             try
                             {
-                                CegepControleur.Instance.SupprimerDepartement(paramNomCegep, leDepartement.Nom);
+                                CegepControleur.Instance.SupprimerCours(paramNomCegep, paramNomDepartement, cours);
                                 Finish();
                             }
                             catch (Exception ex)
                             {
-                                DialoguesUtils.AfficherMessageOK(this, GetString(Resource.String.app_name), ex.Message);
+                                DialoguesUtils.AfficherMessageOK(this, "Erreur", ex.Message);
                             }
                         });
                         AlertDialog dialog = builder.Create();
                         dialog.SetTitle("Suppression");
-                        dialog.SetMessage("Voulez-vous vraiment supprimer ce département ?");
+                        dialog.SetMessage("Voulez-vous vraiment supprimer ce cours ?");
                         dialog.Window.SetGravity(GravityFlags.Bottom);
                         dialog.Show();
                     }
                     catch (Exception ex)
                     {
-                        DialoguesUtils.AfficherMessageOK(this, GetString(Resource.String.app_name), ex.Message);
+                        DialoguesUtils.AfficherMessageOK(this, "Erreur", ex.Message);
                     }
                     break;
 

@@ -45,11 +45,42 @@ namespace AndroidCegep2024.DAOs
         /// <summary>
         /// Constructeur privée du repository.
         /// </summary>
-        private EnseignantRepository() :base() {}
+        private EnseignantRepository() : base() { }
 
         #endregion
 
         #region MethodesService
+
+        /// <summary>
+        /// Méthode de service permettant de vider la liste des Enseignant.
+        /// </summary>
+        /// <param name="nomCegep">le nom du cegep</param>
+        /// <param name="nomDepartement">le nom du departement</param>
+        /// <exception cref="Exception"></exception>
+        public void ViderListeEnseignant(string nomCegep, string nomDepartement)
+        {
+            SqlCommand command = new SqlCommand(null, connexion);
+            command.CommandText = "DELETE FROM Enseignants WHERE idDepartement = @idDepartement";
+
+            SqlParameter idDepartementParam = new SqlParameter("@idDepartement", SqlDbType.Int);
+            idDepartementParam.Value = DepartementRepository.Instance.ObtenirIdDepartement(nomCegep, nomDepartement);
+            command.Parameters.Add(idDepartementParam);
+
+            try
+            {
+                OuvrirConnexion();
+                command.Prepare();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erreur lors de la suppression de tous les enseignants...", ex);
+            }
+            finally
+            {
+                FermerConnexion();
+            }
+        }
 
         /// <summary>
         /// Méthode de service permettant d'obtenir le ID d'un enseignant selon ses informatiques uniques.
@@ -119,7 +150,7 @@ namespace AndroidCegep2024.DAOs
             {
                 OuvrirConnexion();
                 SqlDataReader reader = command.ExecuteReader();
-                while(reader.Read())
+                while (reader.Read())
                 {
                     EnseignantDTO enseignant = new EnseignantDTO(reader.GetInt32(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9));
                     liste.Add(enseignant);
@@ -169,7 +200,7 @@ namespace AndroidCegep2024.DAOs
                 reader.Read();
                 unEnseignant = new EnseignantDTO(reader.GetInt32(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9));
                 reader.Close();
-            return unEnseignant;
+                return unEnseignant;
             }
             catch (Exception ex)
             {

@@ -1,13 +1,14 @@
-﻿using Android.Views;
+﻿using Android.Content;
+using Android.Views;
+using AndroidCegep2024.Utils;
 using AndroidCegep2024.Controleurs;
 using AndroidCegep2024.DTOs;
-using AndroidCegep2024.Utils;
 using MobileGestionCegep;
 
 /// <summary>
 /// Namespace pour les classes de type Vue.
 /// </summary>
-namespace AndroidCegep2024.Vues
+namespace GestionCegepMobile.Vues
 {
     /// <summary>
     /// Classe de type Activité pour la modification d'un Cégep.
@@ -74,6 +75,9 @@ namespace AndroidCegep2024.Vues
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CegepModifier_Activity);
 
+            paramNomCegep = Intent.GetStringExtra("paramNomCegep");
+            Title = paramNomCegep;
+
             edtNomCegepModifier = FindViewById<EditText>(Resource.Id.edtNomModifier);
             edtAdresseCegepModifier = FindViewById<EditText>(Resource.Id.edtAdresseModifier);
             edtVilleCegepModifier = FindViewById<EditText>(Resource.Id.edtVilleModifier);
@@ -90,7 +94,7 @@ namespace AndroidCegep2024.Vues
                     try
                     {
                         CegepControleur.Instance.ModifierCegep(new CegepDTO(paramNomCegep, edtAdresseCegepModifier.Text, edtVilleCegepModifier.Text, edtProvinceCegepModifier.Text, edtCodePostalCegepModifier.Text, edtTelephoneCegepModifier.Text, edtCourrielCegepModifier.Text));
-                        DialoguesUtils.AfficherToasts(this, paramNomCegep + " modifié !!!");
+                        DialoguesUtils.AfficherToasts(this, paramNomCegep + " modifié avec succès.");
                     }
                     catch (Exception ex)
                     {
@@ -98,10 +102,8 @@ namespace AndroidCegep2024.Vues
                     }
                 }
                 else
-                    DialoguesUtils.AfficherMessageOK(this, "Erreur", "Veuillez remplir tous les champs...");
+                    DialoguesUtils.AfficherMessageOK(this, "Erreur", "Veuillez remplir tous les champs.");
             };
-
-            paramNomCegep = Intent.GetStringExtra("paramNomCegep");
         }
 
         /// <summary>
@@ -154,6 +156,10 @@ namespace AndroidCegep2024.Vues
             {
                 case Resource.Id.Retour:
                     Finish();
+                    break;
+
+                case Resource.Id.Quitter:
+                    FinishAffinity();
                     break;
             }
             return base.OnOptionsItemSelected(item);

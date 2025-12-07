@@ -1,7 +1,8 @@
-﻿using Microsoft.Data.SqlClient;
-using System.Data;
+﻿using AndroidCegep2024.DAOs;
 using AndroidCegep2024.DTOs;
 using AndroidCegep2024.Exceptions;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 /// <summary>
 /// Namespace pour les classe de type DAO.
@@ -45,11 +46,37 @@ namespace AndroidCegep2024.DAOs
         /// <summary>
         /// Constructeur privée du repository.
         /// </summary>
-        private CegepRepository() :base() {}
+        private CegepRepository() : base() { }
 
         #endregion
 
         #region MethodesService
+
+
+        /// <summary>
+        /// Méthode de service permettant de vider la liste des cegep
+        /// </summary>
+        public void ViderListeCegep()
+        {
+            SqlCommand command = new SqlCommand(null, connexion);
+            command.CommandText = "DELETE FROM Cegeps";
+
+            try
+            {
+                OuvrirConnexion();
+                command.Prepare();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erreur lors de la suppression de tous les cégeps...", ex);
+            }
+            finally
+            {
+                FermerConnexion();
+            }
+        }
+
 
         /// <summary>
         /// Méthode de service permettant d'obtenir le ID d'un cégep selon ses informatiques uniques.
@@ -92,6 +119,7 @@ namespace AndroidCegep2024.DAOs
         /// <summary>
         /// Méthode de service permettant d'obtenir la liste des départements d'un Cégep.
         /// </summary>
+        /// <param name="nomCegep">Le nom du Cégep.</param>
         /// <returns>Liste des départements.</returns>
         public List<CegepDTO> ObtenirListeCegep()
         {
@@ -114,7 +142,7 @@ namespace AndroidCegep2024.DAOs
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                throw new Exception("Erreur lors de l'obtention de la liste des cégeps...", ex);
             }
             finally
             {
@@ -148,7 +176,7 @@ namespace AndroidCegep2024.DAOs
                 reader.Read();
                 unCegep = new CegepDTO(reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7));
                 reader.Close();
-            return unCegep;
+                return unCegep;
             }
             catch (Exception ex)
             {
@@ -292,10 +320,19 @@ namespace AndroidCegep2024.DAOs
                 command.Prepare();
                 command.ExecuteNonQuery();
             }
+            catch (SqlException e)
+            {
+                if (e.Number == 547)
+                {
+                    throw new DBRelationException("Impossible de supprimer le Cégep. Départements associés.", e);
+                }
+                else throw e;
+            }
             catch (Exception ex)
             {
                 throw new Exception("Erreur lors de la supression d'un Cégep...", ex);
             }
+
             finally
             {
                 FermerConnexion();
